@@ -1,10 +1,14 @@
 package com.example.uts_ppab
 
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.uts_ppab.databinding.ActivityMainBinding
+import java.util.Date
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,32 +36,28 @@ class MainActivity : AppCompatActivity() {
         fun isPasswordValid(password: String): Boolean {
             return password.length >= 8
         }
-        fun checkPasswordMatch() {
-            val password = binding.inputPassword.text.toString()
-            val confirmPassword = binding.inputConfirmPassword.text.toString()
-
-            if (password != confirmPassword) {
-                binding.inputConfirmPassword.error = "Kata sandi tidak cocok"
-            } else {
-                binding.inputConfirmPassword.error = null
-            }
-        }
 
         with(binding){
             btnRegister.setOnClickListener(){
+                val email = inputEmail.text.toString()
+                val username = inputUsername.text.toString()
+                val password = inputPassword.text.toString()
+                val confirmPassword = inputConfirmPassword.text.toString()
+
                 if (inputEmail.text.isEmpty()   ||
                     inputPassword.text.isEmpty()||
                     inputUsername.text.isEmpty()||
-                    inputConfirmPassword.text.isEmpty()
+                    inputConfirmPassword.text.isEmpty() ||
+                    inputBirthday.text.isEmpty()
                 ){
                     val warning = "tolong isi seluruh data dengan benar."
                     Toast.makeText(this@MainActivity, warning, Toast.LENGTH_SHORT).show()
                 }
                 else {
-                    if (isEmailValid(binding.inputEmail.text.toString()) &&
-                        isUsernameValid(binding.inputUsername.text.toString()) &&
-                        isPasswordValid(binding.inputPassword.text.toString())) {
-
+                    if (isEmailValid(email) &&
+                        isUsernameValid(username) &&
+                        isPasswordValid(password)
+                        ){
                         val username = inputUsername.text.toString()
                         val password = inputPassword.text.toString()
 
@@ -74,5 +74,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.example.uts_ppab
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -24,7 +25,10 @@ class SecondActivity : AppCompatActivity() {
                 if (
                     inputPassword.text.toString() == password ||
                     inputUsername.text.toString() == username){
-                    Toast.makeText(this@SecondActivity, "Berhasil Login", Toast.LENGTH_SHORT).show()
+
+                    val intentToThirdActivity =
+                        Intent(this@SecondActivity, ThirdActivity::class.java)
+                    startActivity(intentToThirdActivity)
                 }
                 else{
                     Toast.makeText( this@SecondActivity,"USERNAME ATAU PASSWORD SALAH", Toast.LENGTH_SHORT).show()
